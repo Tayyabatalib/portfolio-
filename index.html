@@ -1695,14 +1695,17 @@
               Replace YOUR_EMAIL_HERE below with your real email address (e.g. tayyaba@gmail.com).
               On the very first submission after deploying, FormSubmit.co sends a 1-click activation email to your inbox.
             -->
-            <form
-              id="contact-form"
-              class="form-grid"
-              data-recipient-email="tayyabatalibdeveloper@gmail.com"
-              novalidate
-            >
-              <!-- Honeypot field to block spam bots -->
-              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+           <form
+  id="contact-form"
+  class="form-grid"
+  method="POST"
+  data-recipient-email="tayyabatalibdeveloper@gmail.com"
+  novalidate
+>
+  <!-- Honeypot & FormSubmit hidden fields for fallback POST -->
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+  <input type="hidden" id="formsubmit-subject" name="_subject" value="Portfolio Inquiry" />
+  <input type="hidden" id="formsubmit-replyto" name="_replyto" value="" />
 
               <div class="form-row-2">
                 <div class="form-field">
