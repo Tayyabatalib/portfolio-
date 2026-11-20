@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tayyaba Talib — BS Computer Science | Machine Learning &amp; Computer Vision</title>
+  <meta name="description" content="Tayyaba Talib — BS Computer Science student at Lahore College for Women University. Work in machine learning, computer vision, climate data applications, and full-stack development." />
+
+  <!-- Fonts: Newsreader / Plus Jakarta Sans / Inter / JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Design tokens — warm linen/parchment palette with mineral moss & terracotta accents */
+    :root {
+      --bg: #FAF7F2;
+      --surface: #FFFFFF;
+      --surface-sand: #F3EFE8;
+      --ink: #171717;
+      --slate: #52504C;
+      --muted: #6E6A63;
+      --line: #E3DDD2;
+      --accent: #1F4E43;
+      --accent-hover: #163A32;
+      --accent-secondary: #B4532A;
+      --accent-tint: rgba(31, 78, 67, 0.07);
+      --error-ink: #9A3412;
+      --max-w: 1060px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-padding-top: 76px;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        padding-inline: 32px;
+      }
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .font-serif-editorial {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 100;
+      background: var(--accent);
+      color: #FFFDF9;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      transition: top 0.15s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    /* Sticky Top Bar */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background-color: rgba(247, 244, 238, 0.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      transition: color 0.15s ease;
+    }
+
+    .brand-name:hover {
+      color: var(--accent);
+    }
+
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .desktop-nav {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      font-size: 14px;
+      font-weight: 450;
+      color: var(--slate);
+      padding-block: 4px;
+      border-bottom: 1.5px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.is-active {
+      color: var(--ink);
+      border-bottom-color: var(--accent);
+    }
+
+    .nav-cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background-color: var(--surface);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .nav-cv-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Mobile Menu Button & Drawer */
+    .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: none;
+      }
+    }
+
+    .mobile-drawer {
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      padding: 12px 20px 20px;
+    }
+
+    @media (min-width: 640px) {
+      .mobile-drawer {
+        padding-inline: 32px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .mobile-drawer {
+        display: none !important;
+      }
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 10px 8px;
+      font-size: 15px;
+      color: var(--slate);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-nav-link:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--ink);
+    }
+
+    /* Section spacing & rhythm */
+    .section-block {
+      padding-block: 64px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-block--sand {
+      background-color: var(--surface-sand);
+    }
+
+    @media (min-width: 768px) {
+      .section-block {
+        padding-block: 84px;
+      }
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .section-title {
+        font-size: 26px;
+      }
+    }
+
+    .section-lead {
+      font-size: 15px;
+      color: var(--slate);
+      max-width: 56ch;
+      line-height: 1.65;
+    }
+
+    /* Asymmetric two-column layout for structured sections */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 860px) {
+      .split-layout {
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 48px;
+        align-items: start;
+      }
+
+      .split-sticky {
+        position: sticky;
+        top: 92px;
+      }
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding-top: 44px;
+      padding-bottom: 68px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    @media (min-width: 768px) {
+      .hero-section {
+        padding-top: 64px;
+        padding-bottom: 88px;
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (min-width: 860px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.78fr);
+        gap: 56px;
+      }
+    }
+
+    .hero-location {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--slate);
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 44px;
+      }
+    }
+
+    .hero-role {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    @media (min-width: 640px) {
+      .hero-role {
+        font-size: 17px;
+      }
+    }
+
+    .hero-copy {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.72;
+      color: var(--slate);
+      max-width: 54ch;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      background-color: var(--accent);
+      color: #FFFDF9;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--accent);
+      transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      background-color: var(--surface);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--line);
+      transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Portrait Frame in Hero Right Column */
+    .portrait-figure {
+      margin: 0;
+      max-width: 340px;
+      width: 100%;
+      justify-self: center;
+    }
+
+    @media (min-width: 860px) {
+      .portrait-figure {
+        max-width: 100%;
+        justify-self: end;
+      }
+    }
+
+    .portrait-frame {
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background-color: var(--surface);
+    }
+
+    .portrait-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 15%;
+    }
+
+    .portrait-caption {
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    /* About Section */
+    .about-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 62ch;
+      color: var(--slate);
+      font-size: 15.5px;
+      line-height: 1.72;
+    }
+
+    .fyp-box {
+      margin-top: 8px;
+      padding: 20px 22px;
+      border-radius: var(--radius-md);
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent-secondary);
+    }
+
+    .fyp-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--accent-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .fyp-title {
+      margin-top: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .fyp-meta {
+      margin-top: 6px;
+      font-size: 14px;
+      color: var(--slate);
+    }
+
+    /* Experience List */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .exp-item {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+      transition: border-color 0.15s ease;
+    }
+
+    .exp-item:hover {
+      border-color: #CFC6B8;
+    }
+
+    @media (min-width: 640px) {
+      .exp-item {
+        padding: 28px;
+      }
+    }
+
+    .exp-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    @media (min-width: 640px) {
+      .exp-header {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+      }
+    }
+
+    .exp-role {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .exp-org {
+      margin-top: 2px;
+      font-size: 14.5px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .exp-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .exp-bullets {
+      margin-top: 14px;
+      padding-left: 18px;
+      list-style-type: disc;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 14.5px;
+      line-height: 1.62;
+      color: var(--slate);
+    }
+
+    .exp-bullets li::marker {
+      color: var(--accent-secondary);
+    }
+
+    /* Projects Section */
+    .projects-top {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .projects-top {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+
+    .filter-group {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .filter-btn {
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background-color: var(--surface);
+      color: var(--slate);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--ink);
+    }
+
+    .filter-btn[aria-pressed="true"] {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #FFFDF9;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Projects Section: Horizontal alternating rows & subtle motion */
+    @keyframes projectFilterIn {
+      from {
+        opacity: 1;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card {
+      padding: 0;
+      border-radius: var(--radius-md);
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr;
+      overflow: hidden;
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.2s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .project-card.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card.is-filtering {
+      animation: projectFilterIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .project-card:hover {
+      border-color: #B8AD9B;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px -14px rgba(23, 23, 23, 0.16);
+    }
+
+    .project-card.is-revealed:hover {
+      transform: translateY(-3px);
+    }
+
+    .project-card.is-hidden {
+      display: none;
+    }
+
+    .project-visual {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background-color: var(--surface-sand);
+    }
+
+    .project-visual svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Horizontal split layout on tablet and desktop (>= 768px) with strict left/right alternation */
+    @media (min-width: 768px) {
+      .project-card {
+        grid-template-columns: minmax(260px, 42%) 1fr;
+        align-items: stretch;
+      }
+
+      .project-card .project-visual {
+        order: 1;
+        aspect-ratio: auto;
+        min-height: 204px;
+        border-bottom: none;
+        border-right: 1px solid var(--line);
+      }
+
+      .project-card .project-body {
+        order: 2;
+      }
+
+      .project-card.is-media-right {
+        grid-template-columns: 1fr minmax(260px, 42%);
+      }
+
+      .project-card.is-media-right .project-visual {
+        order: 2;
+        border-right: none;
+        border-left: 1px solid var(--line);
+      }
+
+      .project-card.is-media-right .project-body {
+        order: 1;
+      }
+    }
+
+    /* Subtle hover micro-motion inside project SVG illustrations */
+    .project-visual .svg-shift-left,
+    .project-visual .svg-shift-right,
+    .project-visual .svg-pulse-node,
+    .project-visual .svg-bar-rise {
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .project-card:hover .svg-shift-left {
+      transform: translateX(-3px);
+    }
+
+    .project-card:hover .svg-shift-right {
+      transform: translateX(3px);
+    }
+
+    .project-card:hover .svg-pulse-node {
+      transform: scale(1.16);
+    }
+
+    .project-card:hover .svg-bar-rise {
+      transform: translateY(-3px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-card,
+      .project-visual .svg-shift-left,
+      .project-visual .svg-shift-right,
+      .project-visual .svg-pulse-node,
+      .project-visual .svg-bar-rise {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    .project-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .project-body {
+        padding: 24px 28px;
+      }
+    }
+
+    .project-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .project-domain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--accent-secondary);
+    }
+
+    .project-title {
+      font-size: 16.5px;
+      font-weight: 600;
+      line-height: 1.38;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      line-height: 1.58;
+      color: var(--slate);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .stack-line {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #EFEAE0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stack-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--slate);
+      background-color: var(--bg);
+      border: 1px solid var(--line);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Technical Skills Grouped Rows */
+    .skills-rows {
+      border-top: 1px solid var(--line);
+    }
+
+    .skill-row {
+      padding-block: 18px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .skill-row {
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 32px;
+        align-items: baseline;
+      }
+    }
+
+    .skill-category {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .skill-items {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--slate);
+    }
+
+    /* Education Section */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .edu-item {
+      padding: 22px 24px;
+      border-radius: var(--radius-md);
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .edu-top {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    @media (min-width: 640px) {
+      .edu-top {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+      }
+    }
+
+    .edu-degree {
+      font-size: 16.5px;
+      font-weight: 600;
+    }
+
+    .edu-school {
+      margin-top: 2px;
+      font-size: 14.5px;
+      color: var(--slate);
+    }
+
+    .edu-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .edu-note {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--slate);
+    }
+
+    /* Contact & Footer */
+    .contact-section {
+      padding-block: 64px 48px;
+    }
+
+    @media (min-width: 768px) {
+      .contact-section {
+        padding-block: 84px 56px;
+      }
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (min-width: 860px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 44px;
+      }
+    }
+
+    .contact-links {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact-form-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    @media (min-width: 640px) {
+      .contact-form-card {
+        padding: 30px 32px;
+      }
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .form-row-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background-color: var(--bg);
+      color: var(--ink);
+      font-size: 14.5px;
+      line-height: 1.5;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: var(--surface);
+    }
+
+    .form-control[aria-invalid="true"] {
+      border-color: var(--error-ink);
+    }
+
+    textarea.form-control {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    .field-error {
+      min-height: 18px;
+      font-size: 12.5px;
+      color: var(--error-ink);
+    }
+
+    .form-actions {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .contact-status {
+      margin-top: 14px;
+      min-height: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: var(--accent);
+    }
+
+    .contact-confirmation {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background-color: var(--surface-sand);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+    }
+
+    .contact-confirmation[hidden] {
+      display: none;
+    }
+
+    .confirmation-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .confirmation-summary {
+      margin-top: 6px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--slate);
+    }
+
+    .confirmation-note {
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding-block: 24px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- 1. Sticky Top Bar -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand-name">Tayyaba Talib</a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button type="button" class="nav-cv-btn" data-download-cv>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M5 21h14" />
+          </svg>
+          <span>Download CV</span>
+        </button>
+      </nav>
+
+      <button
+        type="button"
+        id="menu-toggle"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        aria-label="Toggle navigation menu"
+      >
+        <svg id="icon-hamburger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <svg id="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" hidden>
+          <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile navigation" hidden>
+      <ul class="mobile-nav-list">
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
+        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+        <li><a href="#education" class="mobile-nav-link">Education</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        <li>
+          <button type="button" class="mobile-nav-link" style="width:100%;display:inline-flex;align-items:center;gap:8px;text-align:left;background:none;border-left:none;border-right:none;border-top:none;" data-download-cv>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3v12" />
+              <path d="m7 10 5 5 5-5" />
+              <path d="M5 21h14" />
+            </svg>
+            <span>Download CV</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- 2. Hero Section -->
+    <section id="top" class="hero-section" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div>
+          <p class="hero-location">Lahore, Pakistan</p>
+          <h1 id="hero-heading" class="hero-title">Tayyaba Talib</h1>
+          <p class="hero-role">Software Developer &middot; Machine Learning, Computer Vision &amp; Full-Stack Web</p>
+
+          <p class="hero-copy">
+            I build machine learning and computer vision models, environmental data applications, and full-stack web systems. Alongside my computer science studies in Lahore, I work on production .NET software and data-driven web applications.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              href="https://github.com/Tayyaba2025"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary"
+              aria-label="GitHub profile"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/tayyaba-talib-143692310"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary"
+              aria-label="LinkedIn profile"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <button
+              type="button"
+              class="btn-secondary"
+              data-scroll-contact
+              aria-label="Send an email message via contact form"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <span>Email</span>
+            </button>
+          </div>
+        </div>
+
+        <figure class="portrait-figure">
+          <div class="portrait-frame">
+            <img
+              src="img/tayyaba.jpg"
+              alt="Portrait of Tayyaba Talib wearing a black hijab, face mask, and dark blazer"
+              loading="eager"
+            />
+          </div>
+          <figcaption class="portrait-caption">Tayyaba Talib &mdash; Lahore, Pakistan</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3. About Section -->
+    <section id="about" class="section-block" aria-labelledby="about-heading">
+      <div class="container split-layout">
+        <div class="split-sticky">
+          <h2 id="about-heading" class="section-title">About</h2>
+        </div>
+
+        <div class="about-body">
+          <p>
+            I am completing my BS in Computer Science at Lahore College for Women University (2023&ndash;2027 Expected, CGPA 3.66/4.00). My work includes training and evaluating convolutional neural networks for image classification, building recommendation logic, and working with NetCDF climate datasets for environmental monitoring.
+          </p>
+          <p>
+            On the web side, I write server-side features and REST APIs with C#, ASP.NET Core, and Entity Framework Core, and build interfaces with Blazor, Vue.js, Nuxt.js, Laravel (PHP), and SQL.
+          </p>
+
+          <div class="fyp-box">
+            <p class="fyp-label">Final Year Project &middot; LCWU</p>
+            <h3 class="fyp-title">
+              A Deep Learning Web-based Application for Flood Risk Assessment and Early Warning System
+            </h3>
+            <p class="fyp-meta">BS Computer Science (2023&ndash;2027 Expected) &middot; CGPA: 3.66/4.00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Experience Section -->
+    <section id="experience" class="section-block section-block--sand" aria-labelledby="experience-heading">
+      <div class="container split-layout">
+        <div class="split-sticky">
+          <h2 id="experience-heading" class="section-title">Experience</h2>
+          <p class="section-lead">
+            Production software engineering, environmental data systems, and web development roles.
+          </p>
+        </div>
+
+        <div class="exp-list">
+          <article class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">.NET Developer</h3>
+                <p class="exp-org">AllSpice Technologies &middot; Australian software company</p>
+              </div>
+              <span class="exp-period">Remote &middot; 2025 &ndash; Present</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Develop and maintain backend and full-stack features for a live production application.</li>
+              <li>Implement server-side functionality using C#, ASP.NET Core, and Entity Framework Core.</li>
+              <li>Build and maintain REST APIs used by Blazor and Vue.js/Nuxt.js frontend applications.</li>
+              <li>Update existing workflows while keeping established behaviour and data integrity intact.</li>
+              <li>Collaborate through GitHub pull requests to deliver and maintain code changes.</li>
+            </ul>
+          </article>
+
+          <article class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Full Stack Developer</h3>
+                <p class="exp-org">Water &amp; Environment Nexus</p>
+              </div>
+              <span class="exp-period">July 2026 &ndash; September 2026</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Developed a web-based drought intelligence system using Nuxt.js, Python, NetCDF, MapLibre, and ECharts.</li>
+              <li>Integrated climate and ENSO data to support drought monitoring and geographic analysis.</li>
+              <li>Built interactive maps and visualizations for exploring environmental information.</li>
+              <li>Worked across data processing, application development, and frontend visualization.</li>
+            </ul>
+          </article>
+
+          <article class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Junior Software Developer Intern</h3>
+                <p class="exp-org">BitLogicx &middot; Lahore, Pakistan</p>
+              </div>
+              <span class="exp-period">June 2024 &ndash; August 2024</span>
+            </div>
+            <ul class="exp-bullets">
+              <li>Developed responsive web application features using Laravel (PHP) and Bootstrap.</li>
+              <li>Implemented backend functionality and supported frontend integration.</li>
+              <li>Gained practical experience in web development, debugging, and application maintenance.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Projects Section -->
+    <section id="projects" class="section-block" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="projects-top">
+          <div>
+            <h2 id="projects-heading" class="section-title">Selected Projects</h2>
+            <p class="section-lead">
+              Projects in computer vision, image processing, recommendation logic, and environmental data systems.
+            </p>
+          </div>
+
+          <div class="filter-group" role="group" aria-label="Filter projects">
+            <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="filter-btn" data-filter="ml" aria-pressed="false">ML &amp; Vision</button>
+            <button type="button" class="filter-btn" data-filter="web-data" aria-pressed="false">Web &amp; Data</button>
+          </div>
+        </div>
+
+        <div class="project-list" id="project-list">
+          <article class="project-card is-media-left" data-category="ml" data-media-side="left" style="--reveal-delay: 0ms;">
+            <div class="project-visual" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="240" height="150" fill="#F7F4EE" />
+                <rect class="svg-shift-left" x="16" y="18" width="54" height="50" rx="5" fill="#FFFDF9" stroke="#D5CBBF" />
+                <circle class="svg-pulse-node" cx="43" cy="43" r="13" fill="#1F4E43" fill-opacity="0.16" stroke="#1F4E43" stroke-width="1.5" />
+                <rect x="78" y="18" width="54" height="50" rx="5" fill="#FFFDF9" stroke="#D5CBBF" />
+                <polygon class="svg-pulse-node" points="105,30 118,53 92,53" fill="#B4532A" fill-opacity="0.18" stroke="#B4532A" stroke-width="1.5" />
+                <rect class="svg-shift-right" x="140" y="18" width="84" height="50" rx="5" fill="#FFFDF9" stroke="#D5CBBF" />
+                <rect x="150" y="28" width="64" height="6" rx="2" fill="#1F4E43" />
+                <rect x="150" y="40" width="44" height="6" rx="2" fill="#B4532A" />
+                <rect x="150" y="52" width="52" height="6" rx="2" fill="#C9BFAE" />
+                <rect x="16" y="80" width="208" height="52" rx="5" fill="#FFFDF9" stroke="#D5CBBF" />
+                <line x1="28" y1="106" x2="212" y2="106" stroke="#E2DBD0" stroke-width="1.5" />
+                <circle class="svg-pulse-node" cx="64" cy="106" r="5" fill="#1F4E43" />
+                <circle class="svg-pulse-node" cx="120" cy="106" r="5" fill="#B4532A" />
+                <circle class="svg-pulse-node" cx="176" cy="106" r="5" fill="#52504C" />
+                <text x="28" y="123" fill="#52504C" font-family="JetBrains Mono, monospace" font-size="8.5">CNN MULTI-CLASS PIPELINE</text>
+              </svg>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-domain">ML &amp; Vision</span>
+              </div>
+              <h3 class="project-title">Image Classification System</h3>
+              <p class="project-desc">
+                Built a convolutional neural network to classify images into multiple categories, covering preprocessing, training, and evaluation.
+              </p>
+              <div class="stack-line" aria-label="Technologies">
+                <span class="stack-tag">Python</span>
+                <span class="stack-tag">Convolutional Neural Network</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card is-media-right" data-category="ml" data-media-side="right" style="--reveal-delay: 70ms;">
+            <div class="project-visual" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="240" height="150" fill="#F7F4EE" />
+                <rect class="svg-shift-left" x="16" y="18" width="94" height="84" rx="6" fill="#FFFDF9" stroke="#D5CBBF" />
+                <circle cx="63" cy="54" r="18" fill="#1F4E43" fill-opacity="0.14" stroke="#1F4E43" stroke-width="1.5" />
+                <path d="M51 42L47 31L57 38" stroke="#1F4E43" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="M75 42L79 31L69 38" stroke="#1F4E43" stroke-width="1.5" stroke-linejoin="round" />
+                <rect x="30" y="82" width="66" height="8" rx="3" fill="#EFEAE0" />
+                <rect class="svg-shift-right" x="130" y="18" width="94" height="84" rx="6" fill="#FFFDF9" stroke="#D5CBBF" />
+                <circle cx="177" cy="54" r="18" fill="#B4532A" fill-opacity="0.14" stroke="#B4532A" stroke-width="1.5" />
+                <path d="M160 44L154 35L166 40" stroke="#B4532A" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="M194 44L200 35L188 40" stroke="#B4532A" stroke-width="1.5" stroke-linejoin="round" />
+                <rect x="144" y="82" width="66" height="8" rx="3" fill="#EFEAE0" />
+                <rect x="16" y="112" width="208" height="20" rx="4" fill="#FFFDF9" stroke="#E2DBD0" />
+                <text x="26" y="125" fill="#52504C" font-family="JetBrains Mono, monospace" font-size="8.5">BINARY CLASSIFIER &middot; DATA &amp; EVAL</text>
+              </svg>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-domain">ML &amp; Vision</span>
+              </div>
+              <h3 class="project-title">Cat vs. Dog Image Classification</h3>
+              <p class="project-desc">
+                Developed a binary image classifier across the full process from preparing image data to training and evaluating performance.
+              </p>
+              <div class="stack-line" aria-label="Technologies">
+                <span class="stack-tag">Python</span>
+                <span class="stack-tag">Convolutional Neural Network</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card is-media-left" data-category="web-data" data-media-side="left" style="--reveal-delay: 140ms;">
+            <div class="project-visual" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="240" height="150" fill="#F7F4EE" />
+                <rect x="16" y="18" width="124" height="114" rx="6" fill="#FFFDF9" stroke="#D5CBBF" />
+                <path d="M28 52C44 40 66 42 84 56C100 68 116 62 128 48" stroke="#1F4E43" stroke-width="1.6" stroke-linecap="round" />
+                <path d="M28 84C50 74 72 90 96 78C110 71 120 76 128 84" stroke="#B4532A" stroke-width="1.5" stroke-dasharray="3 2" />
+                <circle class="svg-pulse-node" cx="78" cy="54" r="4" fill="#B4532A" />
+                <text x="26" y="122" fill="#52504C" font-family="JetBrains Mono, monospace" font-size="8">NETCDF &middot; MAPLIBRE</text>
+                <rect x="148" y="18" width="76" height="114" rx="6" fill="#FFFDF9" stroke="#D5CBBF" />
+                <rect class="svg-bar-rise" x="159" y="88" width="10" height="28" rx="2" fill="#1F4E43" fill-opacity="0.35" />
+                <rect class="svg-bar-rise" x="173" y="68" width="10" height="48" rx="2" fill="#1F4E43" />
+                <rect class="svg-bar-rise" x="187" y="52" width="10" height="64" rx="2" fill="#B4532A" />
+                <rect class="svg-bar-rise" x="201" y="76" width="10" height="40" rx="2" fill="#1F4E43" fill-opacity="0.65" />
+                <text x="158" y="34" fill="#52504C" font-family="JetBrains Mono, monospace" font-size="8">ENSO / CHARTS</text>
+              </svg>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-domain">Web &amp; Data</span>
+              </div>
+              <h3 class="project-title">Drought Intelligence and Monitoring System</h3>
+              <p class="project-desc">
+                Built a drought monitoring web application processing NetCDF climate and ENSO data with interactive maps and charts.
+              </p>
+              <div class="stack-line" aria-label="Technologies">
+                <span class="stack-tag">Python</span>
+                <span class="stack-tag">NetCDF</span>
+                <span class="stack-tag">Nuxt.js</span>
+                <span class="stack-tag">MapLibre</span>
+                <span class="stack-tag">ECharts</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card is-media-right" data-category="ml web-data" data-media-side="right" style="--reveal-delay: 210ms;">
+            <div class="project-visual" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="240" height="150" fill="#F7F4EE" />
+                <rect class="svg-shift-left" x="16" y="22" width="74" height="106" rx="6" fill="#FFFDF9" stroke="#D5CBBF" />
+                <circle cx="36" cy="44" r="8" fill="#1F4E43" fill-opacity="0.18" stroke="#1F4E43" stroke-width="1.4" />
+                <rect x="50" y="39" width="28" height="4" rx="2" fill="#171717" />
+                <rect x="50" y="47" width="20" height="4" rx="2" fill="#9A9185" />
+                <rect x="26" y="66" width="54" height="5" rx="2" fill="#E2DBD0" />
+                <rect x="26" y="77" width="44" height="5" rx="2" fill="#E2DBD0" />
+                <rect x="26" y="88" width="48" height="5" rx="2" fill="#E2DBD0" />
+                <path d="M90 54L150 42" stroke="#1F4E43" stroke-width="1.5" stroke-dasharray="3 2" />
+                <path d="M90 78L150 78" stroke="#B4532A" stroke-width="1.5" />
+                <path d="M90 102L150 112" stroke="#52504C" stroke-width="1.4" stroke-dasharray="3 2" />
+                <rect class="svg-shift-right" x="150" y="26" width="74" height="32" rx="5" fill="#FFFDF9" stroke="#1F4E43" />
+                <rect class="svg-shift-right" x="150" y="64" width="74" height="30" rx="5" fill="#FFFDF9" stroke="#B4532A" />
+                <rect class="svg-shift-right" x="150" y="100" width="74" height="26" rx="5" fill="#FFFDF9" stroke="#D5CBBF" />
+                <text x="16" y="142" fill="#52504C" font-family="JetBrains Mono, monospace" font-size="8">CANDIDATE &amp; ROLE MATCHING</text>
+              </svg>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-domain">ML &amp; Data</span>
+              </div>
+              <h3 class="project-title">Smart Job Recommendation System</h3>
+              <p class="project-desc">
+                Structured candidate and job records and implemented matching logic to pair candidates with relevant listings.
+              </p>
+              <div class="stack-line" aria-label="Technologies">
+                <span class="stack-tag">Data processing and matching logic</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card is-media-left" data-category="ml" data-media-side="left" style="--reveal-delay: 280ms;">
+            <div class="project-visual" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="240" height="150" fill="#F7F4EE" />
+                <rect class="svg-shift-left" x="24" y="20" width="84" height="110" rx="5" fill="#FFFDF9" stroke="#C9BFAE" transform="rotate(-3 24 20)" />
+                <line x1="38" y1="42" x2="88" y2="40" stroke="#9A9185" stroke-width="3" stroke-linecap="round" />
+                <line x1="38" y1="54" x2="82" y2="52" stroke="#C9BFAE" stroke-width="3" stroke-linecap="round" />
+                <line x1="38" y1="66" x2="86" y2="64" stroke="#C9BFAE" stroke-width="3" stroke-linecap="round" />
+                <path class="svg-shift-right" d="M116 75H132" stroke="#B4532A" stroke-width="1.6" stroke-linecap="round" />
+                <path class="svg-shift-right" d="M128 71L132 75L128 79" stroke="#B4532A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                <rect class="svg-shift-right" x="140" y="18" width="76" height="114" rx="5" fill="#FFFDF9" stroke="#1F4E43" />
+                <line x1="150" y1="36" x2="206" y2="36" stroke="#171717" stroke-width="3" stroke-linecap="round" />
+                <line x1="150" y1="48" x2="202" y2="48" stroke="#52504C" stroke-width="2.5" stroke-linecap="round" />
+                <line x1="150" y1="58" x2="196" y2="58" stroke="#52504C" stroke-width="2.5" stroke-linecap="round" />
+                <line x1="150" y1="68" x2="204" y2="68" stroke="#52504C" stroke-width="2.5" stroke-linecap="round" />
+                <rect x="150" y="84" width="56" height="34" rx="3" fill="#EFEAE0" />
+                <text x="140" y="143" fill="#52504C" font-family="JetBrains Mono, monospace" font-size="8">DOCUMENT SCANNER</text>
+              </svg>
+            </div>
+            <div class="project-body">
+              <div class="project-meta-row">
+                <span class="project-domain">Vision &amp; Imaging</span>
+              </div>
+              <h3 class="project-title">Smart Document Scanner</h3>
+              <p class="project-desc">
+                Built an application that processes document photographs to produce cleaner, more readable scans.
+              </p>
+              <div class="stack-line" aria-label="Technologies">
+                <span class="stack-tag">Document image processing</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Technical Skills Section -->
+    <section id="skills" class="section-block section-block--sand" aria-labelledby="skills-heading">
+      <div class="container split-layout">
+        <div class="split-sticky">
+          <h2 id="skills-heading" class="section-title">Technical Skills</h2>
+          <p class="section-lead">
+            Tools, languages, and frameworks used across machine learning, data visualization, and web development.
+          </p>
+        </div>
+
+        <div class="skills-rows">
+          <div class="skill-row">
+            <h3 class="skill-category">Machine Learning &amp; Vision</h3>
+            <p class="skill-items">
+              Convolutional Neural Networks, Image Classification, Data Preprocessing, Model Training &amp; Evaluation, Recommendation Systems, Regression
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3 class="skill-category">Programming</h3>
+            <p class="skill-items font-mono">
+              Python, C#, PHP, SQL
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3 class="skill-category">Data &amp; Visualization</h3>
+            <p class="skill-items">
+              NetCDF Climate Data, MapLibre, ECharts, Interactive Dashboards
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3 class="skill-category">Backend &amp; Web</h3>
+            <p class="skill-items">
+              ASP.NET Core, Entity Framework Core, REST APIs, Laravel, Blazor, Vue.js, Nuxt.js
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3 class="skill-category">Tools &amp; Workflow</h3>
+            <p class="skill-items">
+              Git, GitHub, Code Reviews, Debugging, Production Software Maintenance
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Education Section -->
+    <section id="education" class="section-block" aria-labelledby="education-heading">
+      <div class="container split-layout">
+        <div class="split-sticky">
+          <h2 id="education-heading" class="section-title">Education</h2>
+          <p class="section-lead">
+            Academic background in computer science and pre-engineering in Lahore.
+          </p>
+        </div>
+
+        <div class="edu-list">
+          <article class="edu-item">
+            <div class="edu-top">
+              <div>
+                <h3 class="edu-degree">BS Computer Science</h3>
+                <p class="edu-school">Lahore College for Women University</p>
+              </div>
+              <span class="edu-meta">2023&ndash;2027 (Expected) &middot; CGPA: 3.66/4.00</span>
+            </div>
+            <p class="edu-note">
+              <strong>Final Year Project:</strong> A Deep Learning Web-based Application for Flood Risk Assessment and Early Warning System.
+            </p>
+          </article>
+
+          <article class="edu-item">
+            <div class="edu-top">
+              <div>
+                <h3 class="edu-degree">FSc Pre-Engineering</h3>
+                <p class="edu-school">Women Graduate College Baghbanpura, Lahore</p>
+              </div>
+              <span class="edu-meta">2021&ndash;2023 &middot; 953/1100 marks</span>
+            </div>
+          </article>
+
+          <article class="edu-item">
+            <div class="edu-top">
+              <div>
+                <h3 class="edu-degree">Matriculation</h3>
+                <p class="edu-school">Horizon Star School</p>
+              </div>
+              <span class="edu-meta">Completed 2021 &middot; 1087/1100 marks</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Contact / Footer Section -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-grid">
+          <div>
+            <h2 id="contact-heading" class="section-title">Contact</h2>
+            <p class="section-lead">
+              Based in Lahore, Pakistan. Send a message directly to my inbox using the form, or connect on GitHub and LinkedIn.
+            </p>
+
+            <div class="contact-links">
+              <a
+                href="https://github.com/Tayyaba2025"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-secondary"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/tayyaba-talib-143692310"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-secondary"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <button type="button" class="btn-secondary" data-scroll-contact>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                <span>Email</span>
+              </button>
+              <button type="button" class="btn-primary" data-download-cv>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                  <path d="M12 3v12" />
+                  <path d="m7 10 5 5 5-5" />
+                  <path d="M5 21h14" />
+                </svg>
+                <span>Download CV</span>
+              </button>
+              <button type="button" id="copy-profile-btn" class="btn-secondary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                <span>Copy Links</span>
+              </button>
+            </div>
+
+            <p id="contact-status" class="contact-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="contact-form-card">
+            <!--
+              EMAIL DELIVERY SETUP (30 seconds):
+              Replace YOUR_EMAIL_HERE below with your real email address (e.g. tayyaba@gmail.com).
+              On the very first submission after deploying, FormSubmit.co sends a 1-click activation email to your inbox.
+            -->
+            <form
+              id="contact-form"
+              class="form-grid"
+              data-recipient-email="tayyabatalibdeveloper@gmail.com"
+              novalidate
+            >
+              <!-- Honeypot field to block spam bots -->
+              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+              <div class="form-row-2">
+                <div class="form-field">
+                  <label for="sender-name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    id="sender-name"
+                    name="name"
+                    class="form-control"
+                    placeholder="Your name"
+                    autocomplete="name"
+                    required
+                  />
+                  <p id="error-name" class="field-error" role="alert"></p>
+                </div>
+
+                <div class="form-field">
+                  <label for="sender-email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="sender-email"
+                    name="email"
+                    class="form-control"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                  />
+                  <p id="error-email" class="field-error" role="alert"></p>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="inquiry-type" class="form-label">Subject / Inquiry Type</label>
+                <select id="inquiry-type" name="subject" class="form-control">
+                  <option value="Full-Stack / .NET Roles">Full-Stack / .NET Roles</option>
+                  <option value="Machine Learning &amp; Vision">Machine Learning &amp; Vision</option>
+                  <option value="Web &amp; Climate Data Apps">Web &amp; Climate Data Apps</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="sender-message" class="form-label">Message</label>
+                <textarea
+                  id="sender-message"
+                  name="message"
+                  class="form-control"
+                  placeholder="Share role details, project scope, or your question."
+                  required
+                ></textarea>
+                <p id="error-message" class="field-error" role="alert"></p>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="submit-contact-btn" class="btn-primary">Send Message</button>
+              </div>
+            </form>
+
+            <div id="contact-confirmation" class="contact-confirmation" role="status" aria-live="polite" hidden>
+              <p id="confirmation-title" class="confirmation-title">Message sent to Tayyaba Talib</p>
+              <p id="confirmation-summary" class="confirmation-summary"></p>
+              <p id="confirmation-note" class="confirmation-note">
+                Thank you for reaching out. Your message has been delivered via email.
+              </p>
+              <div class="contact-links" style="margin-top: 14px;">
+                <button type="button" id="copy-inquiry-btn" class="btn-secondary">Copy Copy of Message</button>
+                <button type="button" id="reset-form-btn" class="btn-secondary">Send Another Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Tayyaba Talib &middot; Lahore, Pakistan</p>
+      <div class="footer-links">
+        <a href="https://github.com/Tayyaba2025" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/tayyaba-talib-143692310" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <button type="button" data-download-cv style="display:inline-flex;align-items:center;gap:5px;background:none;border:none;padding:0;font:inherit;color:inherit;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3v12" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M5 21h14" />
+          </svg>
+          <span>Download CV</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Mobile navigation drawer toggle
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      const iconHamburger = document.getElementById('icon-hamburger');
+      const iconClose = document.getElementById('icon-close');
+
+      function setMenuOpen(open) {
+        if (!menuToggle || !mobileDrawer) return;
+        menuToggle.setAttribute('aria-expanded', String(open));
+        mobileDrawer.hidden = !open;
+        if (iconHamburger) iconHamburger.hidden = open;
+        if (iconClose) iconClose.hidden = !open;
+      }
+
+      if (menuToggle && mobileDrawer) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+          setMenuOpen(!isOpen);
+        });
+
+        mobileDrawer.querySelectorAll('a, button').forEach((item) => {
+          item.addEventListener('click', () => setMenuOpen(false));
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+            setMenuOpen(false);
+            menuToggle.focus();
+          }
+        });
+      }
+
+      // Project category filter with immediate full visibility and alternating horizontal media
+      const projectGrid = document.getElementById('project-list');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectRows = document.querySelectorAll('.project-card');
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function syncProjectGridState(filter) {
+        let visibleCount = 0;
+
+        projectRows.forEach((row) => {
+          const cats = (row.getAttribute('data-category') || '').split(/\s+/);
+          const show = filter === 'all' || cats.includes(filter);
+          row.classList.toggle('is-hidden', !show);
+          row.style.opacity = '1';
+
+          if (show) {
+            visibleCount += 1;
+            const mediaOnRight = visibleCount % 2 === 0;
+            row.classList.toggle('is-media-right', mediaOnRight);
+            row.classList.toggle('is-media-left', !mediaOnRight);
+            row.setAttribute('data-media-side', mediaOnRight ? 'right' : 'left');
+            row.classList.add('is-revealed');
+            if (!prefersReducedMotion) {
+              row.classList.remove('is-filtering');
+              void row.offsetWidth;
+              row.classList.add('is-filtering');
+            }
+          } else {
+            row.classList.remove('is-filtering');
+            row.classList.remove('is-media-right');
+            row.classList.remove('is-media-left');
+            row.removeAttribute('data-media-side');
+          }
+        });
+
+        if (projectGrid) {
+          projectGrid.classList.toggle('is-filtered', filter !== 'all');
+          projectGrid.setAttribute('data-visible-count', String(visibleCount));
+        }
+      }
+
+      syncProjectGridState('all');
+
+      // Smooth scroll to Contact form and focus Name input for Email buttons
+      document.querySelectorAll('[data-scroll-contact]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const contactSection = document.getElementById('contact');
+          const senderName = document.getElementById('sender-name');
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+          }
+          if (senderName) {
+            setTimeout(() => senderName.focus({ preventScroll: true }), 260);
+          }
+        });
+      });
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter') || 'all';
+
+          filterButtons.forEach((b) => {
+            b.setAttribute('aria-pressed', String(b === btn));
+          });
+
+          syncProjectGridState(filter);
+        });
+      });
+
+      // Client-side CV download from verified CV facts
+      const statusEl = document.getElementById('contact-status');
+
+      function copyPlainText(text, onSuccess, onFallback) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          const ok = document.execCommand('copy');
+          if (ok && typeof onSuccess === 'function') {
+            onSuccess();
+          } else if (typeof onFallback === 'function') {
+            onFallback();
+          }
+        } catch (e) {
+          if (typeof onFallback === 'function') {
+            onFallback();
+          }
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+
+      function buildCvText() {
+        return [
+          'TAYYABA TALIB',
+          'BS Computer Science Student | Machine Learning and Computer Vision',
+          'Location: Lahore, Pakistan',
+          'GitHub: https://github.com/Tayyaba2025',
+          'LinkedIn: https://www.linkedin.com/in/tayyaba-talib-143692310',
+          'Note: Generated directly from verified CV details (no separate hosted PDF URL is attached to this page).',
+          '',
+          'PROFESSIONAL SUMMARY',
+          'Final-year Computer Science student with practical experience in machine learning and computer vision. Built and evaluated convolutional neural networks for image classification, worked on recommendation systems, and processed climate data for environmental monitoring applications. Also experienced in full-stack development with C# and modern web frameworks.',
+          '',
+          'EDUCATION',
+          '- BS Computer Science | Lahore College for Women University (2023-2027 Expected) | CGPA: 3.66/4.00',
+          '  Final Year Project: A Deep Learning Web-based Application for Flood Risk Assessment and Early Warning System.',
+          '- FSc Pre-Engineering | Women Graduate College Baghbanpura, Lahore (2021-2023) | 953/1100 marks',
+          '- Matriculation | Horizon Star School (Completed 2021) | 1087/1100 marks',
+          '',
+          'TECHNICAL SKILLS',
+          '- Machine Learning and Vision: Convolutional Neural Networks, image classification, data preprocessing, model training and evaluation, recommendation systems, regression',
+          '- Programming: Python, C#, PHP, SQL',
+          '- Data and Visualization: NetCDF climate data, MapLibre, ECharts, interactive dashboards',
+          '- Backend and Web: ASP.NET Core, Entity Framework Core, REST APIs, Laravel, Blazor, Vue.js, Nuxt.js',
+          '- Tools: Git, GitHub, code reviews, debugging, production software maintenance',
+          '',
+          'SELECTED PROJECTS',
+          '- Image Classification System | Python, Convolutional Neural Network',
+          '  Built a convolutional neural network to classify images into multiple categories. Worked on image preprocessing, model training, and evaluation of classification results.',
+          '- Cat vs. Dog Image Classification | Python, Convolutional Neural Network',
+          '  Developed a binary image classifier. Completed the full process from preparing the image data to training the model and evaluating its performance.',
+          '- Drought Intelligence and Monitoring System | Python, NetCDF, Nuxt.js, MapLibre, ECharts',
+          '  Developed a web application for drought monitoring that processes climate and ENSO data stored in NetCDF format. Created interactive maps and charts to support geographic analysis of environmental data.',
+          '- Smart Job Recommendation System | Data processing and matching logic',
+          '  Structured candidate and job data and implemented logic to match candidates with relevant job listings.',
+          '- Smart Document Scanner | Document image processing',
+          '  Built an application that processes photographs of documents to produce cleaner and more readable scans.',
+          '',
+          'PROFESSIONAL EXPERIENCE',
+          '- .NET Developer | AllSpice Technologies (Remote 2025 - Present | Australian software company)',
+          '  * Develop and maintain backend and full-stack features for a live production application.',
+          '  * Implement server-side functionality using C#, ASP.NET Core, and Entity Framework Core.',
+          '  * Build and maintain REST APIs used by Blazor and Vue.js/Nuxt.js frontend applications.',
+          '  * Update existing workflows while keeping established behaviour and data integrity intact.',
+          '  * Collaborate through GitHub pull requests to deliver and maintain code changes.',
+          '- Full Stack Developer | Water & Environment Nexus (July 2026 - September 2026)',
+          '  * Developed a web-based drought intelligence system using Nuxt.js, Python, NetCDF, MapLibre, and ECharts.',
+          '  * Integrated climate and ENSO data to support drought monitoring and geographic analysis.',
+          '  * Built interactive maps and visualizations for exploring environmental information.',
+          '  * Worked across data processing, application development, and frontend visualization.',
+          '- Junior Software Developer Intern | BitLogicx (Lahore, Pakistan | June 2024 - August 2024)',
+          '  * Developed responsive web application features using Laravel (PHP) and Bootstrap.',
+          '  * Implemented backend functionality and supported frontend integration.',
+          '  * Gained practical experience in web development, debugging, and application maintenance.'
+        ].join('\n');
+      }
+
+      function triggerCvDownload() {
+        try {
+          const blob = new Blob([buildCvText()], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'Tayyaba_Talib_CV.txt';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+          if (statusEl) {
+            statusEl.textContent = 'Downloaded Tayyaba_Talib_CV.txt from verified CV details.';
+          }
+        } catch (err) {
+          if (statusEl) {
+            statusEl.textContent = 'Direct file download was not available in this view; use LinkedIn or GitHub to connect.';
+          }
+        }
+      }
+
+      document.querySelectorAll('[data-download-cv]').forEach((btn) => {
+        btn.addEventListener('click', triggerCvDownload);
+      });
+
+      // Copy verified CV links
+      const copyBtn = document.getElementById('copy-profile-btn');
+
+      if (copyBtn && statusEl) {
+        copyBtn.addEventListener('click', () => {
+          const text = [
+            'Tayyaba Talib',
+            'GitHub: https://github.com/Tayyaba2025',
+            'LinkedIn: https://www.linkedin.com/in/tayyaba-talib-143692310'
+          ].join('\n');
+
+          copyPlainText(
+            text,
+            () => {
+              statusEl.textContent = 'Copied GitHub and LinkedIn links to clipboard.';
+            },
+            () => {
+              statusEl.textContent = 'GitHub: github.com/Tayyaba2025 · LinkedIn: linkedin.com/in/tayyaba-talib-143692310';
+            }
+          );
+        });
+      }
+
+      // Highlight active navigation link while scrolling
+      const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
+      const trackedSections = Array.from(navLinks)
+        .map((link) => {
+          const id = (link.getAttribute('href') || '').replace('#', '');
+          return { link, el: document.getElementById(id) };
+        })
+        .filter((item) => item.el);
+
+      function updateActiveNav() {
+        const marker = window.scrollY + 120;
+        let currentId = '';
+
+        trackedSections.forEach(({ el }) => {
+          if (el.offsetTop <= marker) {
+            currentId = el.id;
+          }
+        });
+
+        navLinks.forEach((link) => {
+          const target = (link.getAttribute('href') || '').replace('#', '');
+          link.classList.toggle('is-active', Boolean(currentId) && target === currentId);
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+      updateActiveNav();
+
+      // Contact form real email delivery via FormSubmit.co AJAX endpoint
+      const contactForm = document.getElementById('contact-form');
+      const nameInput = document.getElementById('sender-name');
+      const emailInput = document.getElementById('sender-email');
+      const inquiryInput = document.getElementById('inquiry-type');
+      const messageInput = document.getElementById('sender-message');
+      const submitBtn = document.getElementById('submit-contact-btn');
+      const nameError = document.getElementById('error-name');
+      const emailError = document.getElementById('error-email');
+      const messageError = document.getElementById('error-message');
+      const confirmationBox = document.getElementById('contact-confirmation');
+      const confirmationTitle = document.getElementById('confirmation-title');
+      const confirmationSummary = document.getElementById('confirmation-summary');
+      const confirmationNote = document.getElementById('confirmation-note');
+      const copyInquiryBtn = document.getElementById('copy-inquiry-btn');
+      const resetFormBtn = document.getElementById('reset-form-btn');
+      let latestInquiryText = '';
+
+      function setFieldError(input, errorEl, message) {
+        if (!input || !errorEl) return;
+        errorEl.textContent = message;
+        if (message) {
+          input.setAttribute('aria-invalid', 'true');
+        } else {
+          input.removeAttribute('aria-invalid');
+        }
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const nameVal = nameInput ? nameInput.value.trim() : '';
+          const emailVal = emailInput ? emailInput.value.trim() : '';
+          const inquiryVal = inquiryInput ? inquiryInput.value : 'Full-Stack / .NET Roles';
+          const messageVal = messageInput ? messageInput.value.trim() : '';
+
+          let valid = true;
+
+          if (!nameVal) {
+            setFieldError(nameInput, nameError, 'Please enter your name.');
+            valid = false;
+          } else {
+            setFieldError(nameInput, nameError, '');
+          }
+
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailVal || !emailPattern.test(emailVal)) {
+            setFieldError(emailInput, emailError, 'Please enter a valid email address.');
+            valid = false;
+          } else {
+            setFieldError(emailInput, emailError, '');
+          }
+
+          if (!messageVal) {
+            setFieldError(messageInput, messageError, 'Please write a short message.');
+            valid = false;
+          } else {
+            setFieldError(messageInput, messageError, '');
+          }
+
+          if (!valid) {
+            const firstInvalid = contactForm.querySelector('[aria-invalid="true"]');
+            if (firstInvalid) firstInvalid.focus();
+            return;
+          }
+
+          latestInquiryText = [
+            'To: Tayyaba Talib (Lahore, Pakistan)',
+            'From: ' + nameVal + ' (' + emailVal + ')',
+            'Subject / Inquiry Type: ' + inquiryVal,
+            'Message: ' + messageVal
+          ].join('\n');
+
+          const recipientEmail = (contactForm.getAttribute('data-recipient-email') || '').trim();
+          const isConfigured = recipientEmail && recipientEmail !== 'YOUR_EMAIL_HERE' && emailPattern.test(recipientEmail);
+
+          if (!isConfigured) {
+            if (confirmationTitle) {
+              confirmationTitle.textContent = 'Recipient email not configured yet';
+            }
+            if (confirmationSummary) {
+              confirmationSummary.textContent =
+                'From ' + nameVal + ' (' + emailVal + ') · Subject: ' + inquiryVal + ' — "' + messageVal + '"';
+            }
+            if (confirmationNote) {
+              confirmationNote.textContent =
+                'Open index.html and replace YOUR_EMAIL_HERE with your Gmail/email address to enable instant inbox delivery.';
+            }
+            contactForm.hidden = true;
+            if (confirmationBox) confirmationBox.hidden = false;
+            return;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+          }
+          if (statusEl) {
+            statusEl.textContent = 'Sending your message...';
+          }
+
+          try {
+            const response = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(recipientEmail), {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                name: nameVal,
+                email: emailVal,
+                _replyto: emailVal,
+                _subject: 'Portfolio Inquiry [' + inquiryVal + '] from ' + nameVal,
+                inquiry_type: inquiryVal,
+                message: messageVal
+              })
+            });
+
+            const result = await response.json().catch(() => ({}));
+
+            if (!response.ok || result.success === 'false') {
+              throw new Error(result.message || 'Could not send email right now.');
+            }
+
+            if (confirmationTitle) {
+              confirmationTitle.textContent = 'Message sent to Tayyaba Talib';
+            }
+            if (confirmationSummary) {
+              confirmationSummary.textContent =
+                'From ' + nameVal + ' (' + emailVal + ') · Subject: ' + inquiryVal + ' — "' + messageVal + '"';
+            }
+            if (confirmationNote) {
+              confirmationNote.textContent =
+                'Your message has been delivered to my inbox. I will reply to ' + emailVal + ' soon.';
+            }
+            if (statusEl) {
+              statusEl.textContent = '';
+            }
+            contactForm.hidden = true;
+            if (confirmationBox) confirmationBox.hidden = false;
+          } catch (error) {
+            if (statusEl) {
+              statusEl.textContent = 'Delivery failed (' + (error.message || 'network error') + '). Please try again or reach out on LinkedIn.';
+            }
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send Message';
+            }
+          }
+        });
+      }
+
+      if (copyInquiryBtn && statusEl) {
+        copyInquiryBtn.addEventListener('click', () => {
+          if (!latestInquiryText) return;
+          copyPlainText(
+            latestInquiryText,
+            () => {
+              statusEl.textContent = 'Copied message summary to clipboard.';
+            },
+            () => {
+              statusEl.textContent = latestInquiryText;
+            }
+          );
+        });
+      }
+
+      if (resetFormBtn && contactForm && confirmationBox) {
+        resetFormBtn.addEventListener('click', () => {
+          contactForm.reset();
+          latestInquiryText = '';
+          setFieldError(nameInput, nameError, '');
+          setFieldError(emailInput, emailError, '');
+          setFieldError(messageInput, messageError, '');
+          confirmationBox.hidden = true;
+          contactForm.hidden = false;
+          if (nameInput) nameInput.focus();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
