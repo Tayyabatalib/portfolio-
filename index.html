@@ -2135,82 +2135,97 @@
           ].join('\n');
 
           const recipientEmail = (contactForm.getAttribute('data-recipient-email') || '').trim();
-          const isConfigured = recipientEmail && recipientEmail !== 'YOUR_EMAIL_HERE' && emailPattern.test(recipientEmail);
+const isConfigured = recipientEmail && recipientEmail !== 'YOUR_EMAIL_HERE' && emailPattern.test(recipientEmail);
 
-          if (!isConfigured) {
-            if (confirmationTitle) {
-              confirmationTitle.textContent = 'Recipient email not configured yet';
-            }
-            if (confirmationSummary) {
-              confirmationSummary.textContent =
-                'From ' + nameVal + ' (' + emailVal + ') · Subject: ' + inquiryVal + ' — "' + messageVal + '"';
-            }
-            if (confirmationNote) {
-              confirmationNote.textContent =
-                'Open index.html and replace YOUR_EMAIL_HERE with your Gmail/email address to enable instant inbox delivery.';
-            }
-            contactForm.hidden = true;
-            if (confirmationBox) confirmationBox.hidden = false;
-            return;
-          }
+if (!isConfigured) {
+  if (confirmationTitle) {
+    confirmationTitle.textContent = 'Recipient email not configured yet';
+  }
+  if (confirmationSummary) {
+    confirmationSummary.textContent =
+      'From ' + nameVal + ' (' + emailVal + ') · Subject: ' + inquiryVal + ' — "' + messageVal + '"';
+  }
+  if (confirmationNote) {
+    confirmationNote.textContent =
+      'Open index.html and replace YOUR_EMAIL_HERE with your Gmail/email address to enable instant inbox delivery.';
+  }
+  contactForm.hidden = true;
+  if (confirmationBox) confirmationBox.hidden = false;
+  return;
+}
 
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-          }
-          if (statusEl) {
-            statusEl.textContent = 'Sending your message...';
-          }
+if (subjectHidden) {
+  subjectHidden.value = 'Portfolio Inquiry [' + inquiryVal + '] from ' + nameVal;
+}
+if (replytoHidden) {
+  replytoHidden.value = emailVal;
+}
 
-          try {
-            const response = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(recipientEmail), {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              },
-              body: JSON.stringify({
-                name: nameVal,
-                email: emailVal,
-                _replyto: emailVal,
-                _subject: 'Portfolio Inquiry [' + inquiryVal + '] from ' + nameVal,
-                inquiry_type: inquiryVal,
-                message: messageVal
-              })
-            });
+if (submitBtn) {
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
+}
+if (statusEl) {
+  statusEl.textContent = 'Sending your message...';
+}
 
-            const result = await response.json().catch(() => ({}));
+try {
+  const response = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(recipientEmail), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      name: nameVal,
+      email: emailVal,
+      _replyto: emailVal,
+      _subject: 'Portfolio Inquiry [' + inquiryVal + '] from ' + nameVal,
+      inquiry_type: inquiryVal,
+      message: messageVal
+    })
+  });
 
-            if (!response.ok || result.success === 'false') {
-              throw new Error(result.message || 'Could not send email right now.');
-            }
+  const result = await response.json().catch(() => ({}));
 
-            if (confirmationTitle) {
-              confirmationTitle.textContent = 'Message sent to Tayyaba Talib';
-            }
-            if (confirmationSummary) {
-              confirmationSummary.textContent =
-                'From ' + nameVal + ' (' + emailVal + ') · Subject: ' + inquiryVal + ' — "' + messageVal + '"';
-            }
-            if (confirmationNote) {
-              confirmationNote.textContent =
-                'Your message has been delivered to my inbox. I will reply to ' + emailVal + ' soon.';
-            }
-            if (statusEl) {
-              statusEl.textContent = '';
-            }
-            contactForm.hidden = true;
-            if (confirmationBox) confirmationBox.hidden = false;
-          } catch (error) {
-            if (statusEl) {
-              statusEl.textContent = 'Delivery failed (' + (error.message || 'network error') + '). Please try again or reach out on LinkedIn.';
-            }
-          } finally {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Send Message';
-            }
-          }
+  if (!response.ok || result.success === 'false') {
+    throw new Error(result.message || 'Could not send email right now.');
+  }
+
+  if (confirmationTitle) {
+    confirmationTitle.textContent = 'Message sent to Tayyaba Talib';
+  }
+  if (confirmationSummary) {
+    confirmationSummary.textContent =
+      'From ' + nameVal + ' (' + emailVal + ') · Subject: ' + inquiryVal + ' — "' + messageVal + '"';
+  }
+  if (confirmationNote) {
+    confirmationNote.textContent =
+      'Your message has been delivered to my inbox. I will reply to ' + emailVal + ' soon.';
+  }
+  if (statusEl) {
+    statusEl.textContent = '';
+  }
+  contactForm.hidden = true;
+  if (confirmationBox) confirmationBox.hidden = false;
+} catch (error) {
+  // Standard non-AJAX POST fallback avoids CORS/network blocks on restrictive networks or extensions
+  try {
+    contactForm.action = 'https://formsubmit.co/' + encodeURIComponent(recipientEmail);
+    contactForm.method = 'POST';
+    contactForm.submit();
+    return;
+  } catch (fallbackError) {
+    if (statusEl) {
+      statusEl.textContent = 'Delivery failed (Failed to fetch). Check your internet connection, ad-blocker, or recipient email in index.html, or reach out on LinkedIn.';
+    }
+  }
+} finally {
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  }
+}
         });
       }
 
